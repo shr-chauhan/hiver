@@ -127,27 +127,25 @@ function checkIfGameIsOver() {
 
         if(i==0){
         if (grid[i][i]==2){
-            if ((grid[i][i+1] ==2 && grid[i][i+2]==2) || (grid[i+1][i] ==2 && grid[i+2][i]==2) || (grid[i+1][i+1]==2 && grid[i+2][i+2]==2) )
-                alert( "O Won");
-                grid = [];
-                turn = 'X';
-                initializeGrid();
+            if ((grid[i][i+1] ==2 && grid[i][i+2]==2) || (grid[i+1][i] ==2 && grid[i+2][i]==2) || (grid[i+1][i+1]==2 && grid[i+2][i+2]==2) )   
+            gameover(2);
+                
 
         }
         if (grid[i][i]==1){
             if ((grid[i][i+1] ==1 && grid[i][i+2]==1) || (grid[i+1][i] ==1 && grid[i+2][i]==1) || (grid[i+1][i+1]==1 && grid[i+2][i+2]==1) )
-                alert( "X Won");
+            gameover(1);
         } }
 
 
         if(i==1){
             if (grid[i][i]==2){
-            if ((grid[i][i-1] ==2 && grid[i][i+1]==2) || (grid[i-1][i] ==2 && grid[i+1][i]==2))
-                alert( "O Won");
+            if ((grid[i][i-1] ==2 && grid[i][i+1]==2) || (grid[i-1][i] ==2 && grid[i+1][i]==2)|| (grid[i-1][i+1] ==2 && grid[i+1][i-1]==2))
+            gameover(2);
         }
             if (grid[i][i]==1){
-                if ((grid[i][i-1] ==1 && grid[i][i+1]==1) || (grid[i-1][i] ==1 && grid[i+1][i]==1))
-                    alert( "X Won");
+                if ((grid[i][i-1] ==1 && grid[i][i+1]==1) || (grid[i-1][i] ==1 && grid[i+1][i]==1)|| (grid[i-1][i+1] ==1 && grid[i+1][i-1]==1))
+                gameover(1);
         }  }
 
 
@@ -157,18 +155,28 @@ function checkIfGameIsOver() {
 
             if (grid[i][i]==2){
                 if ((grid[i][i-1]==2 && grid[i][i-2]==2) || (grid[i-1][i] ==2 && grid[i-2][i]==2))
-                    alert( "O Won");
+                gameover(2);
             }
             if (grid[i][i]==1){
                 if ((grid[i][i-1] ==1 && grid[i][i-2]==1) || (grid[i-1][i] ==1 && grid[i-2][i]==1))
-                    alert( "X Won");
+                gameover(1);
             } }
     
     }
 }
 
 
-
+function gameover(x){
+    grid = [];
+    turn = 'X';
+    initializeGrid();
+    if (x==2)
+        alert("0 Won")
+    else
+        alert("X Won")
+    
+        // initializeGrid();
+}
 
 
   function toggleTurn() {
