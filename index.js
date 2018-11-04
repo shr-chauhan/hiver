@@ -347,22 +347,34 @@ function checkIfGameIsOver() {
 }
 
 
-function gameover(x){
-    grid = [];
-    turn = 'X';
+// function gameover(x){
+//     grid = [];
+//     turn = 'X';
     
-    if (x==2)
-        alert("0 Won")
-    else
-        alert("X Won")
-    // renderMainGrid();
-    initializeGrid();
-    renderMainGrid();
-    addClickHandlers();
+//     if (x==2)
+//         alert("0 Won")
+//     else
+//         alert("X Won")
+//     // renderMainGrid();
+//     initializeGrid();
+//     renderMainGrid();
+//     addClickHandlers();
     
-        // initializeGrid();
-}
+//         // initializeGrid();
+// }
 
+
+function gameover(x) {
+    setTimeout(function() {
+      if (x == 2) alert("0 Won");
+      else alert("X Won");
+      grid = [];
+      turn = "X";
+      initializeGrid();
+      renderMainGrid();
+      addClickHandlers();
+    }, 200);
+  }
 
   function toggleTurn() {
     if (turn == "X") {
