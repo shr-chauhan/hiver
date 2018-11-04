@@ -18,7 +18,7 @@
  *                  * Use of Google is not encouraged
  *                   * 
  *                    */
-const grid = [];
+let grid = [];
 const GRID_LENGTH = 3;
 let turn = 'X';
 
@@ -71,15 +71,113 @@ function renderMainGrid() {
     parent.innerHTML = '<div class="columnsStyle">' + columnDivs + '</div>';
 }
 
+// function onBoxClick() {
+//     var rowIdx = this.getAttribute("rowIdx");
+//     var colIdx = this.getAttribute("colIdx");
+//     let newValue = 2;
+//     grid[colIdx][rowIdx] = newValue;
+//     renderMainGrid();
+//     addClickHandlers();
+// }
+
+
+// fun checkWinner() {
+//     var temp=0;
+//     var x= grid[0][0];
+    
+//     for(var i=0; i<3;i++){
+//         for(var j=0; j<3; j++){
+//             x = x+grid[i][j];
+//         }
+//         if (x==6){
+//             return "X won"
+//         }
+//         else if(x==3){
+//             return "0 Won"
+//         }
+//     }
+// }
+
 function onBoxClick() {
     var rowIdx = this.getAttribute("rowIdx");
     var colIdx = this.getAttribute("colIdx");
-    let newValue = 1;
+    if (grid[colIdx][rowIdx]) {
+      return;
+    }
+    let newValue;
+    if (turn == "X") {
+      newValue = 1;
+    } else {
+      newValue = 2;
+    }
+    toggleTurn();
     grid[colIdx][rowIdx] = newValue;
     renderMainGrid();
     addClickHandlers();
+    checkIfGameIsOver();
+  }
+
+
+function checkIfGameIsOver() {
+    // var temp=0;
+    // var x= grid[0][0];
+    
+    for(var i=0; i<3;i++){
+
+
+        if(i==0){
+        if (grid[i][i]==2){
+            if ((grid[i][i+1] ==2 && grid[i][i+2]==2) || (grid[i+1][i] ==2 && grid[i+2][i]==2) || (grid[i+1][i+1]==2 && grid[i+2][i+2]==2) )
+                alert( "O Won");
+                grid = [];
+                turn = 'X';
+                initializeGrid();
+
+        }
+        if (grid[i][i]==1){
+            if ((grid[i][i+1] ==1 && grid[i][i+2]==1) || (grid[i+1][i] ==1 && grid[i+2][i]==1) || (grid[i+1][i+1]==1 && grid[i+2][i+2]==1) )
+                alert( "X Won");
+        } }
+
+
+        if(i==1){
+            if (grid[i][i]==2){
+            if ((grid[i][i-1] ==2 && grid[i][i+1]==2) || (grid[i-1][i] ==2 && grid[i+1][i]==2))
+                alert( "O Won");
+        }
+            if (grid[i][i]==1){
+                if ((grid[i][i-1] ==1 && grid[i][i+1]==1) || (grid[i-1][i] ==1 && grid[i+1][i]==1))
+                    alert( "X Won");
+        }  }
+
+
+
+
+        if(i==2){
+
+            if (grid[i][i]==2){
+                if ((grid[i][i-1]==2 && grid[i][i-2]==2) || (grid[i-1][i] ==2 && grid[i-2][i]==2))
+                    alert( "O Won");
+            }
+            if (grid[i][i]==1){
+                if ((grid[i][i-1] ==1 && grid[i][i-2]==1) || (grid[i-1][i] ==1 && grid[i-2][i]==1))
+                    alert( "X Won");
+            } }
+    
+    }
 }
 
+
+
+
+
+  function toggleTurn() {
+    if (turn == "X") {
+      turn = "O";
+    } else {
+      turn = "X";
+    }
+  }
 function addClickHandlers() {
     var boxes = document.getElementsByClassName("box");
     for (var idx = 0; idx < boxes.length; idx++) {
